@@ -304,9 +304,12 @@ NEO4J_PASSWORD=changeme
 KIP_TOKEN=your-secure-token
 
 # Optional
-PORT=8081
+PORT=8081  # Internal container port
 NODE_ENV=production
 LOG_LEVEL=info
+
+# Important: External access uses port 8083 (mapped from internal 8081)
+# API endpoint: http://localhost:8083/execute_kip
 ```
 
 ## Documentation

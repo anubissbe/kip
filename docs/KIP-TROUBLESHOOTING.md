@@ -1,4 +1,54 @@
-# KIP Integration Troubleshooting Guide
+# KIP Troubleshooting Guide
+
+## Fixed Issue (2025-09-21): Port Mismatch Causing "Bad FIND syntax" Errors
+
+### Problem Description
+All KIP queries were failing with "Bad FIND syntax" or parse errors, even with valid KQL syntax.
+
+### Root Cause
+**Port configuration mismatch**: The HTTP wrapper commands (`kip-query` and `kip-upsert`) were configured to use port 8081, but Docker Compose maps the KIP Nexus service to port 8083 on the host.
+
+### Technical Details
+1. **Docker Compose Configuration** (`docker-compose.yml`):
+   ```yaml
+   ports:
+     - "8083:8081"  # Maps container port 8081 to host port 8083
+   ```
+
+2. **Broken Wrapper Scripts** (before fix):
+   ```bash
+   # /usr/local/bin/kip-query was using wrong port:
+   curl -s -X POST http://localhost:8081/execute_kip  # WRONG - port 8081 not accessible
+   ```
+
+3. **Error Manifestation**:
+   - All queries returned `{"error": "Bad FIND syntax"}`
+   - Valid UPSERT operations failed with parse errors
+   - The actual KIP server was running fine, just unreachable
+
+### Solution Applied
+Changed port from 8081 to 8083 in both wrapper scripts:
+
+```bash
+# Fixed the kip-query wrapper
+sudo sed -i 's/localhost:8081/localhost:8083/g' /usr/local/bin/kip-query
+
+# Fixed the kip-upsert wrapper
+sudo sed -i 's/localhost:8081/localhost:8083/g' /usr/local/bin/kip-upsert
+```
+
+### Verification
+After the fix, all queries work correctly:
+```bash
+# These now work:
+kip-query "FIND Task WHERE name = 'Test Task'"                    # ✅ Returns results
+kip-query "UPSERT Project {name: 'KIP', status: 'completed'}"     # ✅ Creates successfully
+```
+
+### Why This Happened
+During installation, the wrapper scripts were created with the internal container port (8081) instead of the externally mapped port (8083). This is a common Docker networking confusion where the internal and external ports differ.
+
+---
 
 ## Problem: KIP Tools Not Working in Claude Code TUI
 
@@ -51,7 +101,7 @@ Create shell wrappers that bypass MCP entirely:
 ```bash
 # /usr/local/bin/kip-query
 #!/bin/bash
-curl -s -X POST http://localhost:8081/execute_kip \
+curl -s -X POST http://localhost:8083/execute_kip \
   -H "Authorization: Bearer changeme-kip-token" \
   -H "Content-Type: application/json" \
   -d "{\"query\":\"$*\"}" | jq .
@@ -84,7 +134,7 @@ sudo mkdir -p /usr/local/bin
 # Create kip-query wrapper
 sudo tee /usr/local/bin/kip-query << 'EOF'
 #!/bin/bash
-curl -s -X POST http://localhost:8081/execute_kip \
+curl -s -X POST http://localhost:8083/execute_kip \
   -H "Authorization: Bearer changeme-kip-token" \
   -H "Content-Type: application/json" \
   -d "{\"query\":\"$*\"}" | jq .
@@ -109,7 +159,7 @@ Replace MCP tool calls with direct HTTP calls in all command files.
 
 ### 1. Check KIP Server Status
 ```bash
-curl -s http://localhost:8081/.well-known/ai-plugin.json | jq .name_for_human
+curl -s http://localhost:8083/.well-known/ai-plugin.json | jq .name_for_human
 # Should return: "KIP Nexus"
 ```
 
