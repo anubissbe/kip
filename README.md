@@ -386,10 +386,10 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 - [ ] Enhanced query language features
 - [ ] Advanced ML capabilities
 
-### v1.2.0 (Planned)
+### v1.2.0 (Future Considerations)
 - [ ] Multi-tenant support
 - [ ] Real-time collaboration
-- [ ] Mobile applications
+- [ ] Advanced visualization tools
 
 ## Support
 
