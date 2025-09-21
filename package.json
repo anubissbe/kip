@@ -115,7 +115,7 @@
     "supertest": "^6.3.3"
   },
   "optionalDependencies": {
-    "sharp": "^0.33.0"
+    "sharp": "^0.34.0"
   },
   "repository": {
     "type": "git",
