@@ -111,7 +111,7 @@
   },
   "devDependencies": {
     "mocha": "^10.2.0",
-    "chai": "^4.3.10",
+    "chai": "^6.0.0",
     "supertest": "^6.3.3"
   },
   "optionalDependencies": {
