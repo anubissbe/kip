@@ -6,6 +6,6 @@
   "dependencies": {
     "express": "^4.19.2",
     "neo4j-driver": "^5.23.0",
-    "zod": "^3.23.8"
+    "zod": "^4.0.0"
   }
 }
