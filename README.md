@@ -6,7 +6,14 @@
 [![Security Score](https://img.shields.io/badge/Security-95%2F100-blue)]()
 [![License](https://img.shields.io/badge/License-MIT-yellow)]()
 
-Enterprise-grade knowledge management platform achieving 98.47% ldclabs/KIP protocol compliance with AI-powered semantic understanding, advanced analytics, and production-ready deployment capabilities.
+Enterprise-grade knowledge management platform achieving 98.47% [ldclabs/KIP protocol](https://github.com/ldclabs/kip) compliance with AI-powered semantic understanding, advanced analytics, and production-ready deployment capabilities.
+
+## 🔗 Protocol Reference
+
+This implementation follows the **ldclabs/KIP (Knowledge Integration Protocol)** standard. Learn more about the protocol specification:
+- 📖 [Official Protocol Repository](https://github.com/ldclabs/kip)
+- 📚 [Protocol Documentation](https://github.com/ldclabs/kip/wiki)
+- 🎯 [Implementation Guide](https://github.com/anubissbe/kip/wiki)
 
 ## 🚀 Overview
 
