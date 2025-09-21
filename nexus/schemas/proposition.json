@@ -1,0 +1,91 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "KIP Proposition Schema",
+  "description": "Schema for KIP Proposition entities following ldclabs/KIP protocol",
+  "type": "object",
+  "version": "1.0.0",
+  "properties": {
+    "predicate": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255,
+      "pattern": "^[a-zA-Z][a-zA-Z0-9_.]*$",
+      "description": "The predicate/property name"
+    },
+    "object": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 10000,
+      "description": "The value/object of the proposition"
+    },
+    "_conceptName": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255,
+      "description": "Name of the associated concept"
+    },
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "UUID identifier for the proposition"
+    },
+    "created": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Unix timestamp of creation"
+    },
+    "updated": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Unix timestamp of last update"
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "type": "string",
+          "enum": ["upsert", "migration", "api", "manual"],
+          "description": "Source of the proposition"
+        },
+        "label": {
+          "type": "string",
+          "description": "Associated label or category"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO timestamp"
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Confidence score for the proposition"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$",
+          "description": "Semantic version of the proposition format"
+        }
+      },
+      "additionalProperties": true,
+      "description": "Additional metadata for the proposition"
+    }
+  },
+  "required": ["predicate", "object", "_conceptName"],
+  "additionalProperties": false,
+  "examples": [
+    {
+      "predicate": "frequency",
+      "object": "quarterly",
+      "_conceptName": "Password Rotation Policy",
+      "id": "550e8400-e29b-41d4-a716-446655440001",
+      "created": 1640995200,
+      "metadata": {
+        "source": "upsert",
+        "confidence": 0.95,
+        "timestamp": "2021-12-31T12:00:00Z"
+      }
+    }
+  ]
+}

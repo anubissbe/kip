@@ -1,0 +1,207 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "KQL Query Response Schema",
+  "description": "Schema for KQL query response structure",
+  "type": "object",
+  "version": "1.0.0",
+  "properties": {
+    "ok": {
+      "type": "boolean",
+      "description": "Success status of the query"
+    },
+    "data": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "concept": {
+                "$ref": "#/definitions/concept"
+              },
+              "propositions": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/proposition"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": true
+          }
+        ]
+      },
+      "description": "Query result data"
+    },
+    "propositions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/proposition"
+      },
+      "description": "Additional propositions created"
+    },
+    "pagination": {
+      "type": "object",
+      "properties": {
+        "hasMore": {
+          "type": "boolean",
+          "description": "Whether more results are available"
+        },
+        "cursor": {
+          "type": ["string", "null"],
+          "description": "Cursor for next page of results"
+        },
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000,
+          "description": "Query limit used"
+        }
+      },
+      "required": ["hasMore", "limit"],
+      "additionalProperties": false,
+      "description": "Pagination information"
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "query_type": {
+          "type": "string",
+          "enum": ["standard", "aggregation", "kql", "legacy"],
+          "description": "Type of query executed"
+        },
+        "has_aggregation": {
+          "type": "boolean",
+          "description": "Whether query contained aggregation"
+        },
+        "ast_depth": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Depth of query AST"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Query execution timestamp"
+        },
+        "execution_time_ms": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Query execution time in milliseconds"
+        },
+        "type_validation": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            },
+            "passed": {
+              "type": "boolean"
+            },
+            "errors": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "additionalProperties": true,
+      "description": "Query execution metadata"
+    },
+    "error": {
+      "type": "string",
+      "description": "Error message if query failed"
+    },
+    "_model": {
+      "type": "string",
+      "enum": ["concept-proposition", "legacy"],
+      "description": "Data model used"
+    }
+  },
+  "required": ["ok"],
+  "additionalProperties": false,
+  "definitions": {
+    "concept": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "created": {
+          "type": "integer"
+        },
+        "updated": {
+          "type": "integer"
+        }
+      },
+      "required": ["name", "type"]
+    },
+    "proposition": {
+      "type": "object",
+      "properties": {
+        "predicate": {
+          "type": "string"
+        },
+        "object": {
+          "type": "string"
+        },
+        "_conceptName": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "created": {
+          "type": "integer"
+        },
+        "metadata": {
+          "type": "object"
+        }
+      },
+      "required": ["predicate", "object", "_conceptName"]
+    }
+  },
+  "examples": [
+    {
+      "ok": true,
+      "data": [
+        {
+          "concept": {
+            "name": "Password Policy",
+            "type": "Policy",
+            "id": "550e8400-e29b-41d4-a716-446655440000"
+          },
+          "propositions": [
+            {
+              "predicate": "frequency",
+              "object": "quarterly",
+              "_conceptName": "Password Policy"
+            }
+          ]
+        }
+      ],
+      "pagination": {
+        "hasMore": false,
+        "cursor": null,
+        "limit": 100
+      },
+      "metadata": {
+        "query_type": "kql",
+        "has_aggregation": false,
+        "timestamp": "2021-12-31T12:00:00Z"
+      }
+    }
+  ]
+}

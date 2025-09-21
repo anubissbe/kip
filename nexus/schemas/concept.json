@@ -1,0 +1,64 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "KIP Concept Schema",
+  "description": "Schema for KIP Concept entities following ldclabs/KIP protocol",
+  "type": "object",
+  "version": "1.0.0",
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255,
+      "description": "Unique identifier name for the concept"
+    },
+    "type": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100,
+      "pattern": "^[A-Za-z][A-Za-z0-9_]*$",
+      "description": "Type classification of the concept"
+    },
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "UUID identifier for the concept"
+    },
+    "created": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Unix timestamp of creation"
+    },
+    "updated": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Unix timestamp of last update"
+    },
+    "_legacy": {
+      "type": "string",
+      "description": "Legacy label for backward compatibility"
+    },
+    "_migrated": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Migration timestamp"
+    },
+    "_originalLabels": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Original Neo4j labels before migration"
+    }
+  },
+  "required": ["name", "type"],
+  "additionalProperties": false,
+  "examples": [
+    {
+      "name": "Password Rotation Policy",
+      "type": "Policy",
+      "id": "550e8400-e29b-41d4-a716-446655440000",
+      "created": 1640995200,
+      "updated": 1640995200
+    }
+  ]
+}

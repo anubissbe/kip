@@ -1,0 +1,1 @@
+/mcp__kip__ensure_kip_header

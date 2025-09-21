@@ -1,0 +1,12 @@
+# .gitignore for KIP
+node_modules/
+*.log
+.env
+.DS_Store
+*.tmp
+*.temp
+coverage/
+.nyc_output/
+.cache/
+dist/
+build/

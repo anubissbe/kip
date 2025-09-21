@@ -1,0 +1,67 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "KQL Query Schema",
+  "description": "Schema for Knowledge Query Language queries",
+  "type": "object",
+  "version": "1.0.0",
+  "properties": {
+    "query": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 10000,
+      "description": "The KQL query string"
+    },
+    "mode": {
+      "type": "string",
+      "enum": ["legacy", "kql"],
+      "description": "Query execution mode"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+(\\.\\d+)?$",
+      "description": "KQL version compatibility"
+    },
+    "timeout": {
+      "type": "integer",
+      "minimum": 1000,
+      "maximum": 60000,
+      "description": "Query timeout in milliseconds"
+    },
+    "options": {
+      "type": "object",
+      "properties": {
+        "enableTypeCoercion": {
+          "type": "boolean",
+          "description": "Enable automatic type coercion"
+        },
+        "strictValidation": {
+          "type": "boolean",
+          "description": "Enable strict type validation"
+        },
+        "cacheResults": {
+          "type": "boolean",
+          "description": "Cache query results"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "required": ["query"],
+  "additionalProperties": false,
+  "examples": [
+    {
+      "query": "FIND Concept WHERE type = 'Policy'",
+      "mode": "kql",
+      "version": "1.0",
+      "timeout": 30000
+    },
+    {
+      "query": "FIND * WHERE name CONTAINS 'password' LIMIT 10",
+      "mode": "kql",
+      "options": {
+        "enableTypeCoercion": true,
+        "strictValidation": false
+      }
+    }
+  ]
+}

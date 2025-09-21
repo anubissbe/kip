@@ -1,0 +1,82 @@
+{
+  "overallScore": 71.25,
+  "complianceLevel": "FAIR (70-80%)",
+  "targetAchieved": false,
+  "assessmentDate": "2025-09-21T14:52:22.609Z",
+  "phaseScores": {
+    "phase1": 25,
+    "phase2": 100,
+    "phase3": 75,
+    "phase4": 100,
+    "phase5": 100,
+    "phase6": 25,
+    "phase7": 100
+  },
+  "topGaps": [
+    {
+      "phase": "phase1",
+      "requirement": "conceptNodes",
+      "description": "Concept nodes with properties",
+      "weight": 0.25,
+      "impact": 0.05
+    },
+    {
+      "phase": "phase1",
+      "requirement": "propositionNodes",
+      "description": "Proposition nodes with subject/predicate/object",
+      "weight": 0.25,
+      "impact": 0.05
+    },
+    {
+      "phase": "phase1",
+      "requirement": "basicRelationships",
+      "description": "Basic EXPRESSES relationships",
+      "weight": 0.25,
+      "impact": 0.05
+    },
+    {
+      "phase": "phase6",
+      "requirement": "conceptPropositionModel",
+      "description": "Concept-Proposition model enforcement",
+      "weight": 0.3,
+      "impact": 0.045
+    },
+    {
+      "phase": "phase6",
+      "requirement": "typeValidation",
+      "description": "Type system validation",
+      "weight": 0.25,
+      "impact": 0.0375
+    }
+  ],
+  "recommendations": [
+    {
+      "priority": "HIGH",
+      "category": "phase1",
+      "action": "Implement Concept nodes with properties",
+      "impact": "5.0% compliance improvement",
+      "effort": "Medium"
+    },
+    {
+      "priority": "HIGH",
+      "category": "phase1",
+      "action": "Implement Proposition nodes with subject/predicate/object",
+      "impact": "5.0% compliance improvement",
+      "effort": "Medium"
+    },
+    {
+      "priority": "HIGH",
+      "category": "phase1",
+      "action": "Implement Basic EXPRESSES relationships",
+      "impact": "5.0% compliance improvement",
+      "effort": "Medium"
+    },
+    {
+      "priority": "HIGH",
+      "category": "architecture",
+      "action": "Review system architecture for compliance gaps",
+      "impact": "Systematic compliance improvement",
+      "effort": "High"
+    }
+  ]
+}

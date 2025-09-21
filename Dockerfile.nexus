@@ -1,0 +1,13 @@
+
+FROM node:20-alpine
+WORKDIR /app
+COPY nexus/package.json nexus/package-lock.json* ./
+RUN npm install --omit=dev || npm install
+COPY nexus/server.js ./server.js
+COPY nexus/kql-parser.js ./kql-parser.js
+COPY nexus/proposition-handler.js ./proposition-handler.js
+COPY nexus/concept-transformer.js ./concept-transformer.js
+COPY nexus/cognitive-interface.js ./cognitive-interface.js
+COPY nexus/metadata-tracker.js ./metadata-tracker.js
+EXPOSE 8081
+CMD ["node", "server.js"]

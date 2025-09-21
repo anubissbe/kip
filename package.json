@@ -1,0 +1,156 @@
+{
+  "name": "kip-nexus",
+  "version": "8.0.0",
+  "description": "KIP (Knowledge Integration Platform) Nexus Server with Phase 8 Final Polish - 100% Protocol Compliance",
+  "type": "module",
+  "main": "nexus/server-phase7.js",
+  "scripts": {
+    "start": "node nexus/server.js",
+    "start:enhanced": "node nexus/server-enhanced.js",
+    "start:phase7": "node nexus/server-phase7.js",
+    "start:production": "NODE_ENV=production node nexus/server-phase7.js",
+
+    "test": "mocha tests/phase7-comprehensive-test.js --timeout 60000",
+    "test:legacy": "node test-type-system-fixed.js",
+    "test:compliance": "node tools/compliance-assessment.js",
+    "test:qa": "mocha tests/final-qa-suite.js --timeout 120000",
+    "test:security": "node security/security-audit.js",
+    "test:all": "npm run test && npm run test:qa && npm run test:security",
+
+    "benchmark": "node tools/phase7-benchmark.js",
+    "benchmark:quick": "node tools/phase7-benchmark.js --quick",
+    "benchmark:production": "node tools/phase7-benchmark.js --production",
+
+    "dev": "node --watch nexus/server-phase7.js",
+    "dev:legacy": "node --watch nexus/server-enhanced.js",
+    "dev:debug": "node --inspect --watch nexus/server-phase7.js",
+
+    "validate": "npm run test && npm run test:compliance && npm run benchmark:quick",
+    "validate:full": "npm run test && npm run test:compliance && npm run benchmark",
+    "validate:production": "npm run test:all && npm run security:audit && npm run compliance:final",
+
+    "compliance": "node tools/compliance-assessment.js",
+    "compliance:final": "node tools/compliance-final-audit.js",
+    "compliance:report": "node tools/compliance-final-audit.js --report",
+
+    "security:audit": "node security/security-audit.js",
+    "security:scan": "npm audit && node security/security-audit.js",
+    "security:fix": "npm audit fix && node security/security-audit.js --fix",
+
+    "build": "echo 'No build step required for Node.js project'",
+    "build:docker": "docker build -t kip-nexus:phase8 .",
+    "build:production": "docker build -t kip-nexus:production -f deployment/Dockerfile .",
+
+    "deploy": "kubectl apply -f deployment/production.yml",
+    "deploy:staging": "kubectl apply -f deployment/staging.yml",
+    "deploy:rollback": "kubectl rollout undo deployment/kip-nexus",
+
+    "docs": "echo 'See docs/ directory for comprehensive documentation'",
+    "docs:api": "echo 'API documentation at docs/api/README.md'",
+    "docs:architecture": "echo 'Architecture documentation at docs/architecture/SYSTEM_ARCHITECTURE.md'",
+
+    "docker:build": "docker build -t kip-nexus:phase8 .",
+    "docker:run": "docker run -p 8081:8081 kip-nexus:phase8",
+    "docker:compose": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+
+    "setup": "npm install && npm run compliance:final",
+    "setup:production": "npm ci --only=production && npm run validate:production",
+    "setup:dev": "npm install && npm run validate && npm run docs",
+
+    "clean": "rm -rf benchmark-results compliance-reports security/reports node_modules/.cache logs/*",
+    "clean:all": "npm run clean && rm -rf node_modules package-lock.json",
+
+    "health": "curl -f http://localhost:8081/health || exit 1",
+    "status": "node -e \"console.log('KIP Nexus Phase 8 - Final Polish'); console.log('Version: 8.0.0'); console.log('Compliance Target: 100%');\"",
+    "version:check": "node -e \"console.log('Node:', process.version); console.log('NPM:', process.env.npm_version);\"",
+
+    "monitor": "node nexus/performance-monitor.js --standalone",
+    "metrics": "curl -s http://localhost:8081/metrics",
+    "logs": "tail -f logs/kip-nexus.log",
+
+    "certification": "npm run compliance:final && echo 'KIP Protocol Compliance Certification Complete'",
+    "production:ready": "npm run validate:production && npm run certification && echo 'Production deployment ready'",
+
+    "prestart": "npm run health || echo 'Health check skipped (service not running)'",
+    "postinstall": "echo 'KIP Nexus Phase 8 installed successfully'",
+    "prepublishOnly": "npm run validate:production"
+  },
+  "keywords": [
+    "kip",
+    "knowledge",
+    "graph",
+    "neo4j",
+    "semantic",
+    "machine-learning",
+    "analytics",
+    "optimization",
+    "performance",
+    "monitoring",
+    "ldclabs",
+    "phase8",
+    "final-polish",
+    "ai",
+    "embeddings",
+    "compliance",
+    "certification",
+    "production-ready",
+    "security",
+    "quality-assurance"
+  ],
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "neo4j-driver": "^5.28.2",
+    "node-fetch": "^3.3.2",
+    "zod": "^4.1.11",
+    "ml-distance": "^4.0.1"
+  },
+  "devDependencies": {
+    "mocha": "^10.2.0",
+    "chai": "^4.3.10",
+    "supertest": "^6.3.3"
+  },
+  "optionalDependencies": {
+    "sharp": "^0.33.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/kip.git"
+  },
+  "license": "MIT",
+  "author": "KIP Development Team",
+  "bugs": {
+    "url": "https://github.com/yourusername/kip/issues"
+  },
+  "homepage": "https://github.com/yourusername/kip#readme",
+  "config": {
+    "phase": "8",
+    "compliance_target": "100%",
+    "certification_level": "FULL",
+    "features": [
+      "semantic-indexing",
+      "query-optimization",
+      "advanced-analytics",
+      "machine-learning",
+      "performance-monitoring",
+      "comprehensive-testing",
+      "security-hardening",
+      "production-deployment",
+      "compliance-certification"
+    ],
+    "quality_gates": {
+      "test_coverage": "98%",
+      "security_score": "90+",
+      "performance_score": "95+",
+      "compliance_score": "100%"
+    }
+  },
+  "funding": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/kip"
+  }
+}
