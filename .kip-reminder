@@ -1,0 +1,11 @@
+═══════════════════════════════════════════════════════════
+⚠️  KIP IS YOUR MEMORY SYSTEM - USE IT OR LOSE CONTEXT  ⚠️
+═══════════════════════════════════════════════════════════
+
+If you're reading this, you MUST:
+1. Run: kip-enforce
+2. Check CLAUDE.md for KIP rules
+3. Use KIP for ALL non-trivial operations
+
+This is not a suggestion - it's required for persistence.
+═══════════════════════════════════════════════════════════

@@ -17,6 +17,46 @@
 
 <!-- KIP-HEADER END -->
 
+## 🔴 CRITICAL: Context Compact Recovery
+
+**AFTER ANY CONTEXT COMPACT OR SESSION START:**
+1. **IMMEDIATELY** run: `kip-enforce`
+2. **THEN** run: `kip-query "FIND KIPReminder WHERE name = 'ENFORCE_KIP_RULES'"`
+3. **CHECK** for `/opt/projects/kip/KIP-ENFORCEMENT-ACTIVE.txt`
+4. **READ** this CLAUDE.md file again
+
+**YOU MUST USE KIP - THIS IS NOT OPTIONAL**
+
+## 📊 VISUAL FEEDBACK REQUIREMENTS (Beta Testing)
+
+**YOU MUST SHOW THESE VISUAL INDICATORS:**
+
+When checking/using KIP:
+```
+【 KIP ACTIVE 】━━━━━━━━━━━━━━━━━━━━━━━
+  Status: [what you're doing]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+When recovering from context compact:
+```
+╔════════════════════════════════════╗
+║  🔄 KIP RECOVERY IN PROGRESS       ║
+║  [1/4] Running kip-enforce...     ║
+║  [2/4] Loading memory...           ║
+║  [3/4] Checking rules...           ║
+║  [4/4] Ready ✅                    ║
+╚════════════════════════════════════╝
+```
+
+When you forget to use KIP:
+```
+⚠️ ═══════════════════════════════════ ⚠️
+   WARNING: Should be using KIP here
+   Correcting now...
+⚠️ ═══════════════════════════════════ ⚠️
+```
+
 # CLAUDE.md
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
