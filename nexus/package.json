@@ -5,7 +5,7 @@
   "type": "module",
   "dependencies": {
     "express": "^5.0.0",
-    "neo4j-driver": "^5.23.0",
+    "neo4j-driver": "^6.0.0",
     "zod": "^4.0.0"
   }
 }
